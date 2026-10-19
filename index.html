@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#050505">
+  <title>Playlist para él 🖤 — A Gift in the Dark</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&display=swap');
+
+    :root {
+      --paper: #efefeb;
+      --ink: #080808;
+      --muted: #aaa9a4;
+      --line: rgba(255,255,255,.23);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: 'Special Elite', 'Courier New', monospace;
+      overflow-x: hidden;
+    }
+
+    .scene {
+      min-height: 100svh;
+      position: relative;
+      isolation: isolate;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 72% 46%, rgba(255,255,255,.07), transparent 26%),
+        radial-gradient(ellipse at 74% 48%, rgba(255,255,255,.035), transparent 43%),
+        linear-gradient(112deg, #000 0%, #090909 48%, #000 100%);
+    }
+
+    /* Abstract ink, feathers and scratches made with CSS */
+    .scene::before {
+      content: "";
+      position: absolute;
+      inset: -8%;
+      z-index: -2;
+      opacity: .92;
+      background:
+        repeating-linear-gradient(106deg, transparent 0 17px, rgba(255,255,255,.035) 18px 19px, transparent 20px 47px),
+        radial-gradient(ellipse at 73% 49%, transparent 0 15%, rgba(255,255,255,.06) 15.5% 16%, transparent 17% 28%, rgba(255,255,255,.04) 28.5% 29%, transparent 30%),
+        conic-gradient(from 215deg at 76% 48%, transparent 0 12deg, rgba(255,255,255,.08) 13deg 17deg, transparent 18deg 36deg, rgba(255,255,255,.05) 37deg 40deg, transparent 41deg 67deg, rgba(255,255,255,.07) 68deg 72deg, transparent 73deg);
+      filter: contrast(180%);
+      transform: rotate(-4deg);
+    }
+
+    .scene::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.94), rgba(0,0,0,.63) 44%, rgba(0,0,0,.14) 100%),
+        repeating-linear-gradient(0deg, transparent 0 5px, rgba(255,255,255,.025) 6px, transparent 7px),
+        radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,.9) 100%);
+    }
+
+    .topbar {
+      width: min(1200px, 88%);
+      margin: 0 auto;
+      padding: 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      letter-spacing: .15em;
+      font-size: .72rem;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .sigil {
+      width: 25px; height: 25px;
+      border: 1px solid var(--paper);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      font-size: .8rem;
+    }
+    .topbar a {
+      color: var(--paper);
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+    .topbar a:hover { opacity: .55; }
+    .nav { display: flex; gap: 27px; }
+
+    main {
+      width: min(1200px, 88%);
+      margin: auto;
+      padding: 70px 0 95px;
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(280px, 1.1fr);
+      align-items: center;
+      gap: 3vw;
+    }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: .72rem; letter-spacing: .24em;
+      color: #c9c8c3;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 34px; height: 1px; background: var(--paper); }
+    h1 {
+      font-family: 'Creepster', Impact, fantasy;
+      text-transform: uppercase;
+      font-size: clamp(4rem, 10.5vw, 9.8rem);
+      line-height: .78;
+      letter-spacing: -.035em;
+      font-weight: 400;
+      margin: 32px 0 26px;
+      text-shadow: 3px 0 rgba(255,255,255,.13), -2px 0 rgba(0,0,0,.8);
+    }
+    h1 span { display: block; }
+    h1 .outline {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.85);
+      margin-left: .34em;
+    }
+    .intro {
+      max-width: 470px;
+      color: #c4c3be;
+      line-height: 1.8;
+      font-size: .95rem;
+      margin: 0 0 34px;
+    }
+    .actions { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: 0 22px;
+      text-decoration: none; text-transform: uppercase;
+      letter-spacing: .13em; font-size: .72rem;
+      border: 1px solid var(--paper); color: var(--ink);
+      background: var(--paper);
+      transition: .25s ease;
+    }
+    .button:hover { background: transparent; color: var(--paper); }
+    .button.secondary { color: var(--paper); background: transparent; }
+    .button.secondary:hover { background: var(--paper); color: var(--ink); }
+
+    .art {
+      min-height: 420px;
+      position: relative;
+      display: grid;
+      place-items: center;
+      filter: grayscale(1);
+      isolation: isolate;
+    }
+    .artwork-image {
+      display: block;
+      width: min(100%, 540px);
+      max-height: 70vh;
+      object-fit: contain;
+      position: relative;
+      z-index: 1;
+      filter: grayscale(1) contrast(1.12) brightness(.92);
+      mix-blend-mode: screen;
+      mask-image: radial-gradient(ellipse at center, #000 48%, rgba(0,0,0,.86) 65%, transparent 100%);
+      -webkit-mask-image: radial-gradient(ellipse at center, #000 48%, rgba(0,0,0,.86) 65%, transparent 100%);
+    }
+
+    .geometric-creature {
+      width:min(100%, 510px); height: min(72vh, 560px); min-height:420px;
+      position:relative; z-index:4; cursor:pointer; display:grid; place-items:center;
+      outline:none; -webkit-tap-highlight-color:transparent;
+      animation: creature-float 5s ease-in-out infinite;
+      filter:drop-shadow(0 0 24px rgba(255,255,255,.09));
+    }
+    .creature-svg { width:100%; height:100%; overflow:visible; }
+    .feather-fan { transform-origin:260px 280px; animation: fan-breathe 7s ease-in-out infinite; }
+    .head-sway { transform-origin:260px 260px; animation: head-sway 4.5s ease-in-out infinite; }
+    .hanging-ink { animation: ink-drip 3.8s ease-in-out infinite; }
+    .touch-hint { position:absolute; bottom:2%; font-size:.62rem; letter-spacing:.25em; color:#777; opacity:.65; }
+    .geometric-creature:active .head-sway { transform:scale(1.035) rotate(-2deg); }
+    .geometric-creature:focus-visible { outline:1px solid #aaa; outline-offset:6px; }
+    @keyframes creature-float { 0%,100%{transform:translateY(0) rotate(-.5deg)} 50%{transform:translateY(-12px) rotate(.8deg)} }
+    @keyframes fan-breathe { 0%,100%{transform:rotate(-1deg) scale(1)} 50%{transform:rotate(2deg) scale(1.035)} }
+    @keyframes head-sway { 0%,100%{transform:rotate(0deg) translateX(0)} 35%{transform:rotate(1.6deg) translateX(3px)} 70%{transform:rotate(-1.3deg) translateX(-3px)} }
+    @keyframes ink-drip { 0%,100%{transform:translateY(0)} 50%{transform:translateY(7px)} }
+    .geometric-creature.is-touched .creature-svg { animation: creature-flinch .55s ease-out; }
+    .geometric-creature.is-touched .eye-pupil { filter:drop-shadow(0 0 8px #fff); }
+    .geometric-creature.is-touched .feather-fan { animation: fan-strike .55s ease-out; }
+    @keyframes fan-strike { 0%{transform:scale(1)} 35%{transform:scale(1.09) rotate(3deg)} 100%{transform:scale(1)} }
+    @keyframes creature-flinch { 0%{transform:scale(1)} 25%{transform:scale(1.055) rotate(2deg);filter:contrast(1.8)} 60%{transform:scale(.985) rotate(-1deg)} 100%{transform:scale(1)} }
+    @media(max-width:600px){ .geometric-creature{height:460px;min-height:390px;width:100%}.art{min-height:440px} }
+
+    .halo {
+      position: absolute;
+      width: min(33vw, 390px);
+      aspect-ratio: 1;
+      border: 1px solid rgba(255,255,255,.26);
+      border-radius: 50%;
+      box-shadow: 0 0 0 20px rgba(255,255,255,.025), 0 0 0 55px rgba(255,255,255,.018);
+    }
+    .creature {
+      width: min(30vw, 350px);
+      height: 410px;
+      position: relative;
+      animation: hover 6s ease-in-out infinite;
+    }
+    .feather {
+      position: absolute;
+      width: 62px; height: 245px;
+      top: 20px; left: 50%;
+      transform-origin: 50% 90%;
+      border-radius: 100% 0 100% 0;
+      background: repeating-linear-gradient(75deg, #eee 0 2px, #171717 3px 7px, #444 8px 9px, #050505 10px 15px);
+      box-shadow: 0 0 22px rgba(255,255,255,.09);
+    }
+    .feather:nth-child(1) { transform: translateX(-50%) rotate(-72deg); }
+    .feather:nth-child(2) { transform: translateX(-50%) rotate(-48deg); height: 280px; }
+    .feather:nth-child(3) { transform: translateX(-50%) rotate(-24deg); height: 300px; }
+    .feather:nth-child(4) { transform: translateX(-50%) rotate(0deg); height: 310px; }
+    .feather:nth-child(5) { transform: translateX(-50%) rotate(24deg); height: 300px; }
+    .feather:nth-child(6) { transform: translateX(-50%) rotate(48deg); height: 280px; }
+    .feather:nth-child(7) { transform: translateX(-50%) rotate(72deg); }
+
+    .mask {
+      position: absolute;
+      width: 175px; height: 215px;
+      left: 50%; top: 94px;
+      transform: translateX(-50%) rotate(-3deg);
+      border-radius: 48% 48% 44% 44%;
+      background:
+        radial-gradient(ellipse at 30% 38%, #050505 0 8%, transparent 9%),
+        radial-gradient(ellipse at 70% 38%, #050505 0 8%, transparent 9%),
+        linear-gradient(105deg, #f0f0e9 0%, #aaa9a4 28%, #f5f5f0 49%, #777 75%, #f5f5f0 100%);
+      clip-path: polygon(18% 0, 82% 0, 100% 24%, 88% 74%, 67% 100%, 31% 96%, 10% 70%, 0 22%);
+      filter: drop-shadow(0 0 18px rgba(255,255,255,.2));
+    }
+    .eye {
+      position: absolute; top: 76px; width: 28px; height: 12px;
+      background: #050505; border-radius: 50%;
+      box-shadow: 0 0 0 5px rgba(0,0,0,.12);
+    }
+    .eye.left { left: 31px; transform: rotate(15deg); }
+    .eye.right { right: 31px; transform: rotate(-15deg); }
+    .grin {
+      position: absolute; left: 50%; top: 120px;
+      transform: translateX(-50%) rotate(-2deg);
+      width: 126px; height: 53px;
+      background: #050505;
+      border-radius: 10% 10% 55% 55%;
+      overflow: hidden;
+      border: 2px solid #111;
+      box-shadow: 0 5px 0 rgba(0,0,0,.2);
+    }
+    .teeth {
+      position: absolute; inset: 0 4px auto;
+      height: 15px;
+      background: repeating-linear-gradient(90deg, #f8f8f1 0 11px, #111 12px 14px);
+      clip-path: polygon(0 0, 100% 0, 95% 100%, 5% 100%);
+    }
+    .drip {
+      position: absolute; top: 163px; left: 50%;
+      width: 5px; height: 75px;
+      background: linear-gradient(#eee, transparent);
+      border-radius: 0 0 100% 100%;
+      box-shadow: 23px 20px 0 -1px #ddd, -30px 34px 0 -2px #bbb;
+      opacity: .7;
+    }
+    .scratch {
+      position: absolute; height: 1px; background: #eee; opacity: .35;
+      transform: rotate(-28deg);
+    }
+    .s1 { width: 95px; top: 46%; left: 0; }
+    .s2 { width: 65px; top: 70%; right: -5%; transform: rotate(21deg); }
+    .s3 { width: 130px; top: 22%; right: -7%; transform: rotate(-61deg); }
+
+    .caption {
+      position: absolute; bottom: 4px; right: 0;
+      font-size: .65rem; letter-spacing: .2em;
+      color: #aaa; writing-mode: vertical-rl;
+    }
+    .bottom {
+      width: min(1200px, 88%);
+      margin: 0 auto;
+      padding: 17px 0 25px;
+      border-top: 1px solid var(--line);
+      display: flex; justify-content: space-between; gap: 20px;
+      color: #8c8b87; font-size: .65rem; letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .warning { display: flex; align-items: center; gap: 8px; }
+    .warning::before { content: "✳"; color: #eee; font-size: 1rem; }
+
+    .manifesto {
+      padding: 110px 6%;
+      text-align: center;
+      background: #e9e9e4;
+      color: #080808;
+    }
+    .manifesto .eyebrow { justify-content: center; color: #333; }
+    .manifesto .eyebrow::before { background: #333; }
+    .manifesto h2 {
+      font-family: 'Creepster', Impact, fantasy;
+      font-size: clamp(2.6rem, 6vw, 5.5rem);
+      font-weight: 400; line-height: .95;
+      max-width: 850px; margin: 28px auto;
+    }
+    .manifesto p { max-width: 570px; margin: auto; line-height: 1.8; color: #454545; }
+    footer {
+      padding: 25px 6%;
+      display: flex; justify-content: space-between; gap: 15px;
+      color: #777; font-size: .65rem; letter-spacing: .12em;
+    }
+
+
+    .playlist-section { padding: 90px max(6%, calc((100% - 1000px)/2)); background: radial-gradient(ellipse at 6% 30%,rgba(255,255,255,.06),transparent 28%), #090909; }
+    .playlist-heading { max-width:720px; margin:0 auto 38px; }
+    .playlist-heading h2 { font-family:'Creepster',Impact,fantasy; font-weight:400; font-size:clamp(3rem,8vw,6rem); line-height:.9; margin:22px 0; }
+    .playlist-heading h2 span { display:block; color:transparent; -webkit-text-stroke:1px #eee; margin-left:1.2em; }
+    .playlist-heading p { color:#aaa; font-size:.85rem; line-height:1.8; max-width:520px; }
+    .track-list { max-width:820px; margin:0 auto; border-top:1px solid var(--line); }
+    .track { display:grid; grid-template-columns:42px minmax(0,1fr) minmax(125px,.7fr) 24px; align-items:center; gap:12px; padding:17px 8px; color:#e9e9e4; text-decoration:none; border-bottom:1px solid rgba(255,255,255,.13); transition:background .2s,padding .2s; }
+    .track:hover { background:rgba(255,255,255,.07); padding-left:15px; }
+    .track-number { color:#777; font-size:.72rem; }
+    .track-title { font-size:.9rem; overflow-wrap:anywhere; }
+    .artist { color:#969590; font-size:.72rem; text-align:right; }
+    .play { text-align:right; font-size:1.1rem; }
+    .web-lines { position:absolute; right:0; top:13%; width:110px; height:115px; opacity:.3; background:repeating-radial-gradient(ellipse at top right,transparent 0 11px,#aaa 12px 13px,transparent 14px 23px); clip-path:polygon(0 0,100% 0,100% 100%,0 30%); }
+    .spider { position:absolute; right:2%; bottom:12%; width:42px; height:32px; opacity:.72; transform:rotate(-22deg); }
+    .spider b { position:absolute; width:15px; height:15px; border-radius:50%; background:#aaa; right:0; top:7px; box-shadow:-13px 3px 0 2px #444; }
+    .spider i { position:absolute; width:22px; height:12px; border-top:1px solid #aaa; border-radius:50%; }
+    .spider i:nth-child(1){left:0;top:0;transform:rotate(25deg)} .spider i:nth-child(2){left:0;top:7px;transform:rotate(-25deg)} .spider i:nth-child(3){left:6px;top:13px;transform:rotate(30deg)} .spider i:nth-child(4){left:6px;top:19px;transform:rotate(-30deg)} .spider i:nth-child(5){right:0;top:0;transform:rotate(-25deg)} .spider i:nth-child(6){right:0;top:7px;transform:rotate(25deg)} .spider i:nth-child(7){right:6px;top:13px;transform:rotate(-30deg)} .spider i:nth-child(8){right:6px;top:19px;transform:rotate(30deg)}
+    .centipede { position:absolute; left:1%; bottom:18%; width:65px; height:16px; opacity:.6; transform:rotate(-45deg); }
+    .centipede b { position:absolute; right:-3px; top:3px; width:9px; height:9px; border-radius:50%; background:#aaa; }
+    .centipede i { display:inline-block; width:6px; height:8px; margin-right:-1px; border-radius:45%; background:#666; border:1px solid #bbb; }
+    .centipede i:nth-child(even) { transform:translateY(3px); }
+    @media(max-width:600px){ .track{grid-template-columns:28px minmax(0,1fr) 20px;gap:8px;padding:15px 3px}.artist{grid-column:2;text-align:left;margin-top:-5px}.play{grid-column:3;grid-row:1/span 2}.playlist-section{padding-top:70px;padding-bottom:75px} }
+
+
+    /* Interactive horror details */
+    .eye-tracker {
+      position: fixed; inset: 0; pointer-events: none; z-index: 30; overflow: hidden;
+    }
+    .eye-tracker::before {
+      content: "TE ESTOY MIRANDO";
+      position: fixed; right: 10px; top: 45%;
+      writing-mode: vertical-rl; font-size: 9px; letter-spacing: .25em;
+      color: rgba(255,255,255,.5); opacity: .7;
+    }
+    .artwork-image {
+      transform: translate(var(--look-x, 0px), var(--look-y, 0px)) scale(var(--look-scale, 1));
+      transition: transform .12s ease-out, filter .25s ease;
+      animation: creature-breathe 5.8s ease-in-out infinite, creature-glitch 11s steps(1,end) infinite;
+      transform-origin: 50% 48%;
+      will-change: transform, filter;
+    }
+    .art::after {
+      content:""; position:absolute; z-index:3; inset:7% 4%;
+      pointer-events:none; opacity:.18; mix-blend-mode:screen;
+      background: repeating-linear-gradient(0deg, transparent 0 6px, rgba(255,255,255,.11) 7px, transparent 8px 13px);
+      animation: scan-haunt 8s linear infinite;
+      mask-image:radial-gradient(ellipse, #000 15%, transparent 75%);
+      -webkit-mask-image:radial-gradient(ellipse, #000 15%, transparent 75%);
+    }
+    .art::before {
+      content:""; position:absolute; z-index:2; inset:12% 14%;
+      border-radius:50%; pointer-events:none;
+      background:radial-gradient(ellipse, rgba(255,255,255,.12), transparent 62%);
+      filter:blur(24px); animation: aura-pulse 4s ease-in-out infinite;
+    }
+    @keyframes creature-breathe {
+      0%,100% { margin-top:0; filter:grayscale(1) contrast(1.12) brightness(.92); }
+      50% { margin-top:-9px; filter:grayscale(1) contrast(1.24) brightness(1.04); }
+    }
+    @keyframes creature-glitch {
+      0%, 91%, 94%, 100% { }
+      92% { filter:grayscale(1) contrast(1.6) brightness(1.15); }
+      93% { filter:grayscale(1) contrast(1.05) brightness(.78); }
+    }
+    @keyframes scan-haunt { from { transform:translateY(-8%); } to { transform:translateY(8%); } }
+    @keyframes aura-pulse { 0%,100% { opacity:.15; transform:scale(.92); } 50% { opacity:.65; transform:scale(1.08); } }
+    .creature-eye {
+      position: absolute; z-index: 4; width: clamp(11px, 2vw, 19px); height: clamp(14px, 2.3vw, 23px);
+      border-radius: 50%; background: #eee; border: 2px solid #999; box-shadow: 0 0 12px #fff7;
+      top: 37%; left: 42%; pointer-events: none;
+    }
+    .creature-eye::after {
+      content:""; position:absolute; width:55%; height:65%; border-radius:50%; background:#050505;
+      left: var(--pupil-x, 22%); top: var(--pupil-y, 15%); transition:left .1s,top .1s;
+    }
+    .creature-eye.eye-two { left: 55%; }
+    .creature-eye.eye-two::after { left: var(--pupil-x, 22%); top: var(--pupil-y, 15%); }
+    .bug {
+      position: fixed; z-index: 40; pointer-events: none; left: 0; top: 0;
+      will-change: transform; filter: drop-shadow(0 2px 3px #000);
+    }
+    .real-spider { width: 44px; height: 38px; }
+    .real-spider { animation: spider-twitch .8s steps(2,end) infinite; }
+    @keyframes spider-twitch { 0%,100% { margin-top:0; } 45% { margin-top:-2px; } 70% { margin-top:1px; } }
+    .real-spider .body { position:absolute; left:17px; top:11px; width:13px; height:17px; border-radius:55% 45% 50% 50%; background:radial-gradient(circle at 30% 25%,#aaa 0,#3c3c3c 28%,#080808 75%); border:1px solid #777; }
+    .real-spider .head { position:absolute; left:27px; top:14px; width:9px; height:9px; border-radius:50%; background:radial-gradient(circle at 30% 20%,#777,#050505 70%); border:1px solid #777; }
+    .real-spider .eye { position:absolute; left:32px; top:17px; width:2px; height:2px; border-radius:50%; background:#d8d8d8; box-shadow:3px 0 #ddd; }
+    .real-spider .leg { position:absolute; width:19px; height:10px; border-top:2px solid #8c8c8c; border-radius:100% 0 0 0; transform-origin:100% 0; }
+    .real-spider .l1{left:1px;top:9px;transform:rotate(25deg)} .real-spider .l2{left:0;top:14px;transform:rotate(8deg)}
+    .real-spider .l3{left:2px;top:20px;transform:rotate(-20deg)} .real-spider .l4{left:5px;top:25px;transform:rotate(-38deg)}
+    .real-spider .l5{right:-1px;top:8px;transform:scaleX(-1) rotate(25deg)} .real-spider .l6{right:-1px;top:14px;transform:scaleX(-1) rotate(8deg)}
+    .real-spider .l7{right:0;top:20px;transform:scaleX(-1) rotate(-20deg)} .real-spider .l8{right:3px;top:25px;transform:scaleX(-1) rotate(-38deg)}
+    .real-centipede { display:flex; align-items:center; width:110px; height:24px; transform-origin:center; animation: centipede-undulate .65s ease-in-out infinite alternate; }
+    @keyframes centipede-undulate { from { margin-top:-2px; } to { margin-top:2px; } }
+    .real-centipede .segment { position:relative; flex:1; height:11px; border-radius:45%; border:1px solid #aaa; background:linear-gradient(180deg,#777,#171717 55%,#050505); box-shadow:inset 0 1px 2px #bbb8; }
+    .real-centipede .segment::before,.real-centipede .segment::after { content:""; position:absolute; width:7px; height:8px; border-left:1px solid #999; border-radius:0 0 0 90%; top:7px; }
+    .real-centipede .segment::before{left:0;transform:rotate(20deg)} .real-centipede .segment::after{right:0;transform:scaleX(-1) rotate(20deg)}
+    .love-note {
+      margin: 22px 0 0; padding: 16px; border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.025); color: #dedbd5; font-family: Georgia,serif;
+      font-size: clamp(1rem,2vw,1.2rem); line-height:1.9; min-height:70px;
+      box-shadow: 0 0 30px #fff04; cursor:pointer; transition:background .3s;
+    }
+    .love-note:hover { background:rgba(255,255,255,.07); }
+    .love-note small { display:block; color:#888; font: .62rem/1.7 monospace; letter-spacing:.15em; text-transform:uppercase; }
+    .love-controls { display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
+    .love-controls button { background:transparent; color:#ddd; border:1px solid #666; padding:10px 13px; letter-spacing:.1em; font-size:.68rem; cursor:pointer; text-transform:uppercase; }
+    .love-controls button:hover { background:#eee; color:#111; }
+    @media (prefers-reduced-motion: reduce) {
+      .bug,.geometric-creature,.creature-svg,.creature-eye::after,.art::before,.art::after { animation:none!important; transition:none!important; }
+    }
+
+    @keyframes hover { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-9px) rotate(1deg); } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; scroll-behavior: auto !important; } }
+    @media (max-width: 760px) {
+      .topbar { padding: 20px 0; }
+      .nav { gap: 13px; }
+      .nav a { font-size: .62rem; }
+      main { grid-template-columns: 1fr; padding: 70px 0 55px; gap: 15px; }
+      h1 { font-size: clamp(4.5rem, 19vw, 7rem); }
+      .art { min-height: 340px; margin-top: 5px; }
+      .creature { width: 270px; height: 330px; transform: scale(.82); }
+      .halo { width: 260px; }
+      .caption { right: 2px; }
+      .bottom { font-size: .56rem; line-height: 1.7; }
+      .bottom span:last-child { text-align: right; }
+    }
+    @media (max-width: 390px) {
+      .topbar { width: 90%; }
+      .brand { font-size: .62rem; }
+      .nav { gap: 9px; }
+      .nav a { font-size: .55rem; }
+      main, .bottom { width: 90%; }
+      .actions { gap: 10px; }
+      .button { padding: 0 14px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="scene" id="inicio">
+    <header class="topbar">
+      <a class="brand" href="#inicio"><span class="sigil">†</span><span>A GIFT IN THE DARK</span></a>
+      <nav class="nav" aria-label="Navegación principal">
+        <a href="#playlist">PLAYLIST</a>
+        <a href="#manifiesto">LA NOTA</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="copy">
+        <div class="eyebrow">Una colección hecha para ti</div>
+        <h1><span>ONLY</span><span class="outline">FOR YOU</span></h1>
+        <p class="intro">Catorce canciones escondidas entre tinta negra, plumas imposibles, ojos que observan desde la oscuridad, arañas silenciosas y ciempiés que se pierden en las grietas. Un pequeño universo extraño, creado especialmente para ti.</p>
+        <div class="love-note" id="loveNote" role="button" tabindex="0" aria-label="Cambiar frase de amor">
+          <small>MENSAJE ENCONTRADO · TOCA PARA REVELAR OTRO</small>
+          <span id="lovePhrase">Te amo, mi Nivuki. Incluso las sombras conocen tu nombre.</span>
+        </div>
+        <div class="love-controls">
+          <button type="button" id="nextPhrase">Revelar otra frase ↗</button>
+          <button type="button" id="toggleBugs" aria-pressed="true">Criaturas: activas</button>
+        </div>
+        <div class="actions">
+          <a class="button" href="#playlist">Escuchar la lista <span aria-hidden="true">&nbsp; ↗</span></a>
+          <a class="button secondary" href="#manifiesto">Leer la nota</a>
+        </div>
+      </section>
+
+      <div class="art" aria-label="Ilustración de payaso siniestro sobre fondo negro">
+          <div class="halo"></div>
+          <div class="geometric-creature" role="button" tabindex="0" aria-label="Toca a la criatura para descubrir un mensaje">
+            <svg class="creature-svg" viewBox="0 0 520 560" xmlns="http://www.w3.org/2000/svg" aria-label="Criatura geométrica oscura con plumas, ojos y una sonrisa inquietante">
+              <defs>
+                <linearGradient id="maskShade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".48" stop-color="#c9c9c9"/><stop offset="1" stop-color="#555"/></linearGradient>
+                <linearGradient id="featherShade" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5f5f5"/><stop offset=".45" stop-color="#303030"/><stop offset="1" stop-color="#050505"/></linearGradient>
+                <radialGradient id="eyeShade"><stop offset="0" stop-color="#777"/><stop offset=".55" stop-color="#111"/><stop offset="1" stop-color="#000"/></radialGradient>
+                <filter id="rough"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" seed="8" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="2.2"/></filter>
+              </defs>
+              <g class="feather-fan" stroke="#aaa" stroke-width="2" filter="url(#rough)">
+                <path d="M248 250 L118 126 L55 50 L145 75 L180 125 L165 50 L205 91 L260 235Z" fill="url(#featherShade)"/>
+                <path d="M250 240 L190 95 L155 20 L225 67 L242 119 L258 62 L272 235Z" fill="url(#featherShade)"/>
+                <path d="M267 238 L278 94 L310 15 L339 84 L320 135 L350 99 L287 250Z" fill="url(#featherShade)"/>
+                <path d="M280 245 L355 119 L430 60 L411 126 L376 159 L452 132 L300 270Z" fill="url(#featherShade)"/>
+                <path d="M290 270 L410 199 L485 155 L455 219 L408 239 L438 261 L295 300Z" fill="url(#featherShade)"/>
+                <path d="M230 280 L112 241 L35 240 L84 281 L128 284 L95 319 L235 315Z" fill="url(#featherShade)"/>
+                <path d="M235 300 L132 329 L70 360 L135 365 L172 345 L185 374 L245 330Z" fill="url(#featherShade)"/>
+                <g stroke="#ddd" stroke-width="1" opacity=".7"><path d="M80 68L246 247M166 36L266 242M312 32L280 245M450 77L296 272M478 168L301 295M46 251L234 310"/></g>
+              </g>
+              <g class="head-sway">
+                <path d="M260 135 C190 135 142 183 145 254 C147 320 184 367 260 390 C336 367 373 320 375 254 C378 183 330 135 260 135Z" fill="url(#maskShade)" stroke="#eee" stroke-width="4"/>
+                <path d="M157 230 L184 194 L231 213 L244 246 L209 266 L174 253Z" fill="#020202"/>
+                <path d="M276 246 L289 213 L336 194 L363 230 L346 253 L311 266Z" fill="#020202"/>
+                <g class="eye-pupil" id="pupilLeft"><ellipse cx="205" cy="231" rx="10" ry="18" fill="url(#eyeShade)"/><ellipse cx="208" cy="226" rx="3" ry="6" fill="#eee" opacity=".72"/></g>
+                <g class="eye-pupil" id="pupilRight"><ellipse cx="315" cy="231" rx="10" ry="18" fill="url(#eyeShade)"/><ellipse cx="318" cy="226" rx="3" ry="6" fill="#eee" opacity=".72"/></g>
+                <path d="M256 238 L229 287 L255 276 L268 290 L277 238 L264 250Z" fill="#171717" stroke="#aaa" stroke-width="2"/>
+                <path d="M164 287 L190 293 L211 285 L235 298 L258 290 L282 299 L308 285 L340 289 L352 304 L333 345 L304 363 L260 371 L213 360 L183 343Z" fill="#010101" stroke="#ddd" stroke-width="3"/>
+                <path d="M176 298 L195 304 L210 298 L228 310 L244 304 L260 313 L277 303 L296 310 L315 298 L338 300" fill="none" stroke="#777" stroke-width="2"/>
+                <g fill="#eee" stroke="#777" stroke-width="1">
+                  <path d="M184 299 L204 304 L198 323 L183 315Z"/><path d="M207 302 L226 308 L221 330 L207 322Z"/><path d="M231 307 L249 310 L247 333 L232 329Z"/><path d="M255 310 L274 308 L278 332 L260 334Z"/><path d="M280 307 L299 302 L303 323 L285 331Z"/><path d="M304 302 L324 298 L327 316 L310 324Z"/>
+                </g>
+                <path d="M183 337 L199 331 L206 353 L193 348Z M319 331 L336 336 L326 351 L313 356Z" fill="#050505" stroke="#888" stroke-width="1"/>
+                <path d="M195 354 Q260 376 325 354" fill="none" stroke="#444" stroke-width="4"/>
+                <path d="M176 245 Q169 266 180 281 Q187 269 183 252Z M345 245 Q352 266 341 281 Q334 269 338 252Z" fill="#050505"/>
+                <path d="M201 264 L191 278 M319 264 L329 278" stroke="#111" stroke-width="4"/>
+                <path d="M159 278 Q170 298 166 318 M361 278 Q350 298 354 318" fill="none" stroke="#111" stroke-width="5"/>
+              </g>
+              <g class="hanging-ink" stroke="#eee" stroke-width="2" opacity=".8"><path d="M190 350 Q183 385 194 407"/><path d="M330 350 Q341 384 332 399"/><path d="M260 380 Q252 411 264 428"/></g>
+              <g fill="#080808" stroke="#888" stroke-width="2"><path d="M140 405 Q100 430 118 467 Q137 445 140 405Z"/><path d="M380 408 Q420 430 400 468 Q384 447 380 408Z"/></g>
+            </svg>
+            <span class="touch-hint">TOCA A LA CRIATURA</span>
+          </div>
+          <div class="web-lines" aria-hidden="true"></div>
+          <div class="spider" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+          <div class="centipede" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+          <div class="caption">NO MIRES DEMASIADO TIEMPO</div>
+        </div>
+      </div>
+    </main>
+
+    <div class="bottom">
+      <span class="warning">Un regalo en clave de horror</span>
+      <span>Plumas · ojos · arañas · ciempiés</span>
+    </div>
+  </section>
+
+  
+<section class="playlist-section" id="playlist">
+  <div class="playlist-heading">
+    <div class="eyebrow">Lado A · Lado B · Lado C</div>
+    <h2>PLAYLIST <span>PARA ÉL</span></h2>
+    <p>Abre cada canción en YouTube y escucha la versión que prefieras. La lista conserva el orden que elegiste.</p>
+  </div>
+  <div class="track-list"><a class="track" href="https://www.youtube.com/results?search_query=Len%C3%AC+Crystal+Castles" target="_blank" rel="noopener"><span class="track-number">01</span><span class="track-title">Lenì</span><span class="artist">Crystal Castles</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=OWN+MY+MIND+M%C3%A5neskin" target="_blank" rel="noopener"><span class="track-number">02</span><span class="track-title">OWN MY MIND</span><span class="artist">Måneskin</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=VALENTINE+M%C3%A5neskin" target="_blank" rel="noopener"><span class="track-number">03</span><span class="track-title">VALENTINE</span><span class="artist">Måneskin</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=%E6%B5%B4%E5%AE%A4+Yokushitsu+Sheena+Ringo" target="_blank" rel="noopener"><span class="track-number">04</span><span class="track-title">浴室 (Yokushitsu)</span><span class="artist">Sheena Ringo</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=%E4%BE%9D%E5%AD%98%E7%97%87+Izonsh%C5%8D+Sheena+Ringo" target="_blank" rel="noopener"><span class="track-number">05</span><span class="track-title">依存症 (Izonshō)</span><span class="artist">Sheena Ringo</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=Koko+de+Kiss+Shite+Sheena+Ringo" target="_blank" rel="noopener"><span class="track-number">06</span><span class="track-title">ここでキスして。 (Koko de Kiss Shite)</span><span class="artist">Sheena Ringo</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=K%C5%8Dfukuron+Sheena+Ringo" target="_blank" rel="noopener"><span class="track-number">07</span><span class="track-title">幸福論 (Kōfukuron)</span><span class="artist">Sheena Ringo</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=Yami+ni+Furu+Ame+Sheena+Ringo" target="_blank" rel="noopener"><span class="track-number">08</span><span class="track-title">闇に降る雨 (Yami ni Furu Ame)</span><span class="artist">Sheena Ringo</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=Gips+Sheena+Ringo" target="_blank" rel="noopener"><span class="track-number">09</span><span class="track-title">ギブス (Gips)</span><span class="artist">Sheena Ringo</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=Sacrifice+London+After+Midnight" target="_blank" rel="noopener"><span class="track-number">10</span><span class="track-title">Sacrifice</span><span class="artist">London After Midnight</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=The+Passion+of+Lovers+The+Shroud" target="_blank" rel="noopener"><span class="track-number">11</span><span class="track-title">The Passion of Lovers</span><span class="artist">The Shroud</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=Lovesong+The+Cure" target="_blank" rel="noopener"><span class="track-number">12</span><span class="track-title">Lovesong</span><span class="artist">The Cure</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=Kiss+London+After+Midnight" target="_blank" rel="noopener"><span class="track-number">13</span><span class="track-title">Kiss</span><span class="artist">London After Midnight</span><span class="play">↗</span></a>
+<a class="track" href="https://www.youtube.com/results?search_query=The+Passion+of+Lovers+Bauhaus" target="_blank" rel="noopener"><span class="track-number">14</span><span class="track-title">The Passion of Lovers</span><span class="artist">Bauhaus</span><span class="play">↗</span></a></div>
+</section>
+<section class="manifesto" id="manifiesto">
+  <div class="eyebrow">Una nota para ti</div>
+  <h2>Incluso la oscuridad guarda algo hermoso.</h2>
+  <p>Entre criaturas de tinta, alas imposibles, arañas silenciosas y ciempiés que recorren las grietas, hay catorce canciones que me hicieron pensar en ti. Esta pequeña galería es tuya. No hace falta entenderla toda: solo sentirla.</p>
+  <p class="closing-line">“Te elijo incluso en mis pensamientos más oscuros. Mi corazón te busca, mi Nivuki; eres irrepetible para mí.”</p>
+</section>
+<footer id="final"><span>A GIFT IN THE DARK — 14 TRACKS</span><a href="#inicio" style="color:inherit;text-decoration:none">VOLVER ARRIBA ↑</a></footer>
+
+<div class="eye-tracker" aria-hidden="true"></div>
+<script>
+(() => {
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const art = document.querySelector('.art');
+  const image = document.querySelector('.geometric-creature');
+  const phrases = [
+    'Te amo, mi Nivuki. Incluso las sombras conocen tu nombre.',
+    'Eres muy especial para mí; no existe nadie que ocupe tu lugar.',
+    'Eres mi vida, mi refugio y mi pensamiento favorito.',
+    'Eres mío en este pequeño universo que inventé para nosotros; y yo soy tuya por elección.',
+    'Mi corazón te eligió y vuelve a elegirte, incluso cuando el mundo duerme.',
+    'Quiero ser ese pensamiento bonito que te acompaña cuando todo está en silencio.',
+    'Si pudiera guardar algo para siempre, guardaría cada instante contigo.',
+    'Soy tuya en cada canción que te dedico y en cada palabra que no me atrevo a decir.',
+    'Mi Nivuki, me tienes enamorada hasta de las pequeñas cosas que te hacen ser tú.',
+    'Quédate en mis días, en mis noches y en todos esos lugares donde nace mi felicidad.',
+    'No quiero poseer tu libertad; quiero que, pudiendo elegir cualquier camino, quieras caminar a mi lado.',
+    'Hay un lugar en mi mundo que lleva tu nombre y nadie más puede ocuparlo.',
+    'Te quiero cerca, en mis sueños y en mis canciones; mi cariño por ti tiene raíces profundas.',
+    'Que el destino lo sepa: mi debilidad favorita siempre tendrá tu nombre.',
+    'Tú eres mi caos favorito, mi dulce obsesión y la historia que quiero seguir escribiendo.',
+    'Si la noche tuviera un secreto, sería que en cada sombra vuelvo a pensar en ti.',
+    'No necesito cadenas para elegirte: mi corazón se queda porque quiere.',
+    'Eres mi persona especial, mi Nivuki; te llevo conmigo incluso cuando no estás aquí.',
+    'Quiero ser tuya con ternura, con lealtad y con la libertad de elegirnos cada día.',
+    'Te amo más de lo que cabe en esta pantalla; por eso lo escondí entre criaturas y canciones.'
+  ];
+  let phraseIndex = 0;
+  const phrase = document.getElementById('lovePhrase');
+  const note = document.getElementById('loveNote');
+  function nextPhrase() {
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    phrase.textContent = phrases[phraseIndex];
+  }
+  document.getElementById('nextPhrase').addEventListener('click', nextPhrase);
+
+  const creature = document.querySelector('.geometric-creature');
+  function touchCreature() {
+    nextPhrase();
+    creature.classList.remove('is-touched');
+    void creature.offsetWidth;
+    creature.classList.add('is-touched');
+    const hint = creature.querySelector('.touch-hint');
+    if (hint) hint.textContent = 'MENSAJE REVELADO';
+  }
+  creature.addEventListener('click', touchCreature);
+  creature.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); touchCreature(); }
+  });
+
+  note.addEventListener('click', nextPhrase);
+  note.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nextPhrase(); } });
+
+  // The eyes follow pointer movement and gently respond to scrolling on touch devices.
+  function follow(x, y) {
+    if (!image || !art) return;
+    const rect = art.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = Math.max(-1, Math.min(1, (x - cx) / (window.innerWidth * .48)));
+    const dy = Math.max(-1, Math.min(1, (y - cy) / (window.innerHeight * .48)));
+    image.style.setProperty('--look-x', (dx * 10).toFixed(1) + 'px');
+    image.style.transform = `translate(${(dx*9).toFixed(1)}px,${(dy*6).toFixed(1)}px)`;
+    image.style.setProperty('--look-y', (dy * 7).toFixed(1) + 'px');
+    image.style.setProperty('--look-scale', (1.015 + Math.min(0.025, Math.abs(dx) * .012 + Math.abs(dy) * .012)).toFixed(3));
+    document.querySelectorAll('.eye-pupil').forEach((eye, i) => {
+      eye.setAttribute('transform', `translate(${dx*8} ${dy*6})`);
+    });
+  }
+  window.addEventListener('pointermove', e => {
+    follow(e.clientX, e.clientY);
+    if (!reduceMotion && image && Math.random() > .985) {
+      image.style.filter = 'grayscale(1) contrast(1.65) brightness(1.12)';
+      window.setTimeout(() => { image.style.filter = ''; }, 95);
+    }
+  }, {passive:true});
+  window.addEventListener('scroll', () => {
+    const x = window.innerWidth * (.5 + Math.sin(window.scrollY * .003) * .25);
+    follow(x, window.innerHeight * .45);
+  }, {passive:true});
+
+  const toggle = document.getElementById('toggleBugs');
+  let bugsOn = true;
+  const bugs = [];
+  function addSpider(index) {
+    const el = document.createElement('div');
+    el.className = 'bug real-spider';
+    el.setAttribute('aria-hidden','true');
+    el.innerHTML = '<span class="leg l1"></span><span class="leg l2"></span><span class="leg l3"></span><span class="leg l4"></span><span class="leg l5"></span><span class="leg l6"></span><span class="leg l7"></span><span class="leg l8"></span><span class="body"></span><span class="head"></span><span class="eye"></span>';
+    document.body.appendChild(el);
+    bugs.push({el, kind:'spider', x:(index*173+35)%innerWidth, y:(index*227+110)%innerHeight, speed:.35+index*.09, phase:index*1.7, size:.7+(index%3)*.18});
+  }
+  function addCentipede(index) {
+    const el = document.createElement('div');
+    el.className = 'bug real-centipede';
+    el.setAttribute('aria-hidden','true');
+    el.innerHTML = Array.from({length:13},(_,i)=>'<span class="segment" style="height:'+(8+(i%3)*2)+'px"></span>').join('');
+    document.body.appendChild(el);
+    bugs.push({el, kind:'centipede', x:(index*241+20)%innerWidth, y:(index*193+180)%innerHeight, speed:.4+index*.08, phase:index*2.3, size:.72+(index%2)*.2});
+  }
+  for(let i=0;i<5;i++) addSpider(i);
+  for(let i=0;i<3;i++) addCentipede(i);
+  toggle.addEventListener('click', () => {
+    bugsOn = !bugsOn;
+    toggle.textContent = bugsOn ? 'Criaturas: activas' : 'Criaturas: ocultas';
+    toggle.setAttribute('aria-pressed', String(bugsOn));
+    bugs.forEach(b => b.el.style.display = bugsOn ? 'block' : 'none');
+  });
+  function animate(time) {
+    if (!reduceMotion && bugsOn) {
+      const w = window.innerWidth, h = window.innerHeight;
+      bugs.forEach((b,i) => {
+        const t = time * .00035 * b.speed + b.phase;
+        b.x += Math.cos(t) * (b.kind==='spider' ? 1.0 : 1.25);
+        b.y += Math.sin(t*1.13) * (b.kind==='spider' ? .72 : .95);
+        if (b.x < -130) b.x = w+100;
+        if (b.x > w+130) b.x = -100;
+        if (b.y < -60) b.y = h+40;
+        if (b.y > h+60) b.y = -40;
+        const angle = Math.atan2(Math.sin(t*1.13), Math.cos(t)) * 180 / Math.PI;
+        b.el.style.transform = `translate(${b.x}px,${b.y}px) rotate(${angle}deg) scale(${b.size})`;
+        b.el.style.opacity = String(.55 + .25 * (Math.sin(t)+1)/2);
+        b.el.querySelectorAll('.leg').forEach((leg,j)=> leg.style.transform += '');
+      });
+    }
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+})();
+</script>
+
+</body>
+</html>
